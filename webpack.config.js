@@ -1,8 +1,9 @@
-var path = repuire('path');
-var htmlWebpackPlugin = repuire('html-webpack-plugin');
+var path = require('path');
+var htmlWebpackPlugin = require('html-webpack-plugin');
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+var TEM_PATH = path.resolve(ROOT_PATH, 'template');
 
 module.exports = {
 	entry: {
@@ -23,7 +24,7 @@ module.exports = {
 			loader: 'url?limit=8192'
 		},{
 			test: /\.js$/,
-			loader: 'babel',
+			loaders:['babel?{"presets":["es2015"]}'],
 			exclude: /node_modules/
 		},{
 			test: /\.vue$/,
@@ -50,7 +51,7 @@ module.exports = {
 		extensions: ['', '.js', '.vue'],
 		// 别名，可以直接使用别名来代表设定的路径以及其他
 		alias: {
-			component: path.join(__dirname, './app/component')
+			components: path.join(__dirname, './app/components')
 		}
 	}
 }
