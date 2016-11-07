@@ -43,7 +43,7 @@ module.exports = {
 	],
 	vue: {
 		loaders: {
-			js: 'babel'
+			js: 'babel?{"presets":["es2015"]}'
 		}
 	},
 	resolve: {

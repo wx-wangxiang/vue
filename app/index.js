@@ -1,2 +1,7 @@
-import Div from 'components/test';
-document.body.appendChild(Div());
+import Vue from 'vue';
+import App from 'components/app';
+
+new Vue({
+	el: 'body',
+	components: {App}
+})
