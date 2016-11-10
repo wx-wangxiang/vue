@@ -46,15 +46,11 @@
 
 	'use strict';
 
-	var _test = __webpack_require__(1);
-
-	var _test2 = _interopRequireDefault(_test);
-
-	var _vue = __webpack_require__(2);
+	var _vue = __webpack_require__(1);
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _app = __webpack_require__(4);
+	var _app = __webpack_require__(3);
 
 	var _app2 = _interopRequireDefault(_app);
 
@@ -64,26 +60,9 @@
 		el: 'body',
 		components: { App: _app2.default }
 	});
-	//document.body.appendChild(Div());
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	function sayHello() {
-		var element = document.createElement('div');
-		element.innerHTML = 'hello';
-		return element;
-	}
-	exports.default = sayHello;
-
-/***/ },
-/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -10324,10 +10303,10 @@
 	}, 0);
 
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -10513,18 +10492,18 @@
 
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(5)
-	__vue_script__ = __webpack_require__(9)
+	__webpack_require__(4)
+	__vue_script__ = __webpack_require__(8)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\components\\app.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(10)
+	__vue_template__ = __webpack_require__(9)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10549,16 +10528,16 @@
 	})()}
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(6);
+	var content = __webpack_require__(5);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(8)(content, {});
+	var update = __webpack_require__(7)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -10575,21 +10554,21 @@
 	}
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(7)();
+	exports = module.exports = __webpack_require__(6)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n.message{\n\tcolor: lightblue;\n\tfont-size: 36px;\n\tfont-weight: bold;\n}\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.title{\n\ttext-align: left;\n}\n.to-do-list li{\n\tcursor: pointer;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t -ms-user-select: none;\n\t     user-select: none;\n}\n.message{\n\tcolor: lightblue;\n\tfont-size: 36px;\n\tfont-weight: bold;\n}\n.red{\n\tcolor: red;\n}\n.green{\n\tcolor: green;\n}\n.hasFinished{\n\ttext-decoration: line-through;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 	/*
@@ -10645,7 +10624,7 @@
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -10867,7 +10846,7 @@
 
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -10876,30 +10855,78 @@
 		value: true
 	});
 	// <template>
-	// 	<div class="message">{{msg}}</div>
+	// 	<h1 class="title">This is my to-do list</h1>
+	// 	<input type="text" v-model="newItem" @keyup.enter="addItem">
+	// 	<ul class="to-do-list">
+	// 		<li v-for="item in items" v-text="item.label" @click="clickHandler(item)" :class="{hasFinished: item.finished}"></li>
+	// 	</ul>
 	// </template>
 	// <script>
 	exports.default = {
 		data: function data() {
 			return {
-				msg: 'hello world!'
+				items: [{
+					label: 'eat dinner',
+					finished: false
+				}, {
+					label: 'brush teeth',
+					finished: false
+				}, {
+					label: 'go to bed',
+					finished: false
+				}],
+				newItem: ''
 			};
+		},
+
+		methods: {
+			clickHandler: function clickHandler(item) {
+				item.finished = !item.finished;
+				console.log('ok');
+			},
+			addItem: function addItem() {
+				console.log(this.newItem);
+				var item = this.newItem;
+				var obj = {
+					label: item,
+					finished: false
+				};
+				this.items.push(obj);
+				this.newItem = '';
+			}
 		}
 	};
 	// </script>
 	// <style type="text/css">
+	// 	.title{
+	// 		text-align: left;
+	// 	}
+	// 	.to-do-list li{
+	// 		cursor: pointer;
+	// 		-webkit-user-select: none;
+	// 		user-select: none;
+	// 	}
 	// 	.message{
 	// 		color: lightblue;
 	// 		font-size: 36px;
 	// 		font-weight: bold;
 	// 	}
+	// 	.red{
+	// 		color: red;
+	// 	}
+	// 	.green{
+	// 		color: green;
+	// 	}
+	// 	.hasFinished{
+	// 		text-decoration: line-through;
+	// 	}
 	// </style>
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"message\">{{msg}}</div>\n";
+	module.exports = "\n<h1 class=\"title\">This is my to-do list</h1>\n<input type=\"text\" v-model=\"newItem\" @keyup.enter=\"addItem\">\n<ul class=\"to-do-list\">\n\t<li v-for=\"item in items\" v-text=\"item.label\" @click=\"clickHandler(item)\" :class=\"{hasFinished: item.finished}\"></li>\n</ul>\n";
 
 /***/ }
 /******/ ]);
