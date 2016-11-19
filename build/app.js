@@ -10503,7 +10503,7 @@
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\components\\app.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(9)
+	__vue_template__ = __webpack_require__(14)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10562,7 +10562,7 @@
 
 
 	// module
-	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.title{\n\ttext-align: left;\n}\n.to-do-list li{\n\tcursor: pointer;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t -ms-user-select: none;\n\t     user-select: none;\n}\n.message{\n\tcolor: lightblue;\n\tfont-size: 36px;\n\tfont-weight: bold;\n}\n.red{\n\tcolor: red;\n}\n.green{\n\tcolor: green;\n}\n.hasFinished{\n\ttext-decoration: line-through;\n}\n", ""]);
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n.title{\n\ttext-align: left;\n}\n.to-do-list{\n\tlist-style: none;\n}\n.to-do-list li{\n\tcursor: pointer;\n\t-webkit-user-select: none;\n\t-moz-user-select: none;\n\t -ms-user-select: none;\n\t     user-select: none;\n}\n.message{\n\tcolor: lightblue;\n\tfont-size: 36px;\n\tfont-weight: bold;\n}\n.red{\n\tcolor: red;\n}\n.green{\n\tcolor: green;\n}\n.hasFinished{\n\ttext-decoration: line-through;\n}\n", ""]);
 
 	// exports
 
@@ -10847,49 +10847,88 @@
 
 /***/ },
 /* 8 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+
+	var _store = __webpack_require__(9);
+
+	var _store2 = _interopRequireDefault(_store);
+
+	var _commont = __webpack_require__(11);
+
+	var _commont2 = _interopRequireDefault(_commont);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	// <template>
-	// 	<h1 class="title">This is my to-do list</h1>
-	// 	<input type="text" v-model="newItem" @keyup.enter="addItem">
+	// 	<h1 class="title">chat room</h1>
 	// 	<ul class="to-do-list">
-	// 		<li v-for="item in items" v-text="item.label" @click="clickHandler(item)" :class="{hasFinished: item.finished}"></li>
+	// 		<li v-for="item in items" @click="clickHandler(item)">
+	// 			<span class="name">{{item.name}}</span><strong>:</strong>
+	// 			<span class="text">{{item.text}}</span>
+	// 		</li>
 	// 	</ul>
+	// 	<commont></commont>
 	// </template>
 	// <script>
 	exports.default = {
-		data: function data() {
-			return {
-				items: [{
-					label: 'eat dinner',
-					finished: false
-				}, {
-					label: 'brush teeth',
-					finished: false
-				}, {
-					label: 'go to bed',
-					finished: false
-				}],
-				newItem: ''
-			};
+		store: _store2.default,
+		/*data() {
+	 	return {
+	 		items: [{
+	 			name: 'Tom',
+	 			text: 'hello'
+	 		},{
+	 			name: 'Tommy',
+	 			text: 'hello'
+	 		},{
+	 			name: 'Jim',
+	 			text: 'hello'
+	 		}],
+	 		newItem: ''
+	 	}
+	 },*/
+		computed: {
+			items: undefined.$store.msgList
 		},
-
+		components: { Commont: _commont2.default },
+		events: {
+			'submitCommont': function submitCommont(msg) {
+				// 事件回调内的 `this` 自动绑定到注册它的实例上
+				console.log('hello');
+				var obj = {
+					name: 'wang xiang',
+					text: msg
+				};
+				console.log('ok');
+				this.items.push(obj);
+			}
+		},
 		methods: {
 			clickHandler: function clickHandler(item) {
 				item.finished = !item.finished;
 				console.log('ok');
 			},
+			submitHandler: function submitHandler(message) {
+				console.log('hello');
+				var obj = {
+					name: 'wang xiang',
+					text: message
+				};
+				console.log('ok');
+				this.items.push(obj);
+			},
 			addItem: function addItem() {
 				console.log(this.newItem);
 				var item = this.newItem;
 				var obj = {
-					label: item,
-					finished: false
+					name: 'wang xiang',
+					text: item
 				};
 				this.items.push(obj);
 				this.newItem = '';
@@ -10900,6 +10939,9 @@
 	// <style type="text/css">
 	// 	.title{
 	// 		text-align: left;
+	// 	}
+	// 	.to-do-list{
+	// 		list-style: none;
 	// 	}
 	// 	.to-do-list li{
 	// 		cursor: pointer;
@@ -10924,9 +10966,667 @@
 
 /***/ },
 /* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _vuex = __webpack_require__(10);
+
+	var _vuex2 = _interopRequireDefault(_vuex);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	_vue2.default.use(_vuex2.default);
+
+	//项目需要维护的状态
+	var store = new _vuex2.default.Store({
+	  state: {
+	    msgList: [],
+	    newComment: {}
+	  },
+	  mutations: {
+	    add_comment: function add_comment(state) {
+	      /*var comment = {
+	      	author: '',
+	      	content: '',
+	      	date: +new Date()
+	      };*/
+	      state.msgList.push(state.newComment);
+	    }
+	  },
+	  getters: {
+	    newComment: function newComment(state) {
+	      return state.newComment;
+	    }
+	  }
+	});
+
+	exports.default = store;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * vuex v2.0.0
+	 * (c) 2016 Evan You
+	 * @license MIT
+	 */
+	(function (global, factory) {
+	   true ? module.exports = factory() :
+	  typeof define === 'function' && define.amd ? define(factory) :
+	  (global.Vuex = factory());
+	}(this, (function () { 'use strict';
+
+	var devtoolHook =
+	  typeof window !== 'undefined' &&
+	  window.__VUE_DEVTOOLS_GLOBAL_HOOK__
+
+	function devtoolPlugin (store) {
+	  if (!devtoolHook) { return }
+
+	  store._devtoolHook = devtoolHook
+
+	  devtoolHook.emit('vuex:init', store)
+
+	  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+	    store.replaceState(targetState)
+	  })
+
+	  store.subscribe(function (mutation, state) {
+	    devtoolHook.emit('vuex:mutation', mutation, state)
+	  })
+	}
+
+	function applyMixin (Vue) {
+	  var version = Number(Vue.version.split('.')[0])
+
+	  if (version >= 2) {
+	    var usesInit = Vue.config._lifecycleHooks.indexOf('init') > -1
+	    Vue.mixin(usesInit ? { init: vuexInit } : { beforeCreate: vuexInit })
+	  } else {
+	    // override init and inject vuex init procedure
+	    // for 1.x backwards compatibility.
+	    var _init = Vue.prototype._init
+	    Vue.prototype._init = function (options) {
+	      if ( options === void 0 ) options = {};
+
+	      options.init = options.init
+	        ? [vuexInit].concat(options.init)
+	        : vuexInit
+	      _init.call(this, options)
+	    }
+	  }
+
+	  /**
+	   * Vuex init hook, injected into each instances init hooks list.
+	   */
+
+	  function vuexInit () {
+	    var options = this.$options
+	    // store injection
+	    if (options.store) {
+	      this.$store = options.store
+	    } else if (options.parent && options.parent.$store) {
+	      this.$store = options.parent.$store
+	    }
+	  }
+	}
+
+	function mapState (states) {
+	  var res = {}
+	  normalizeMap(states).forEach(function (ref) {
+	    var key = ref.key;
+	    var val = ref.val;
+
+	    res[key] = function mappedState () {
+	      return typeof val === 'function'
+	        ? val.call(this, this.$store.state, this.$store.getters)
+	        : this.$store.state[val]
+	    }
+	  })
+	  return res
+	}
+
+	function mapMutations (mutations) {
+	  var res = {}
+	  normalizeMap(mutations).forEach(function (ref) {
+	    var key = ref.key;
+	    var val = ref.val;
+
+	    res[key] = function mappedMutation () {
+	      var args = [], len = arguments.length;
+	      while ( len-- ) args[ len ] = arguments[ len ];
+
+	      return this.$store.commit.apply(this.$store, [val].concat(args))
+	    }
+	  })
+	  return res
+	}
+
+	function mapGetters (getters) {
+	  var res = {}
+	  normalizeMap(getters).forEach(function (ref) {
+	    var key = ref.key;
+	    var val = ref.val;
+
+	    res[key] = function mappedGetter () {
+	      if (!(val in this.$store.getters)) {
+	        console.error(("[vuex] unknown getter: " + val))
+	      }
+	      return this.$store.getters[val]
+	    }
+	  })
+	  return res
+	}
+
+	function mapActions (actions) {
+	  var res = {}
+	  normalizeMap(actions).forEach(function (ref) {
+	    var key = ref.key;
+	    var val = ref.val;
+
+	    res[key] = function mappedAction () {
+	      var args = [], len = arguments.length;
+	      while ( len-- ) args[ len ] = arguments[ len ];
+
+	      return this.$store.dispatch.apply(this.$store, [val].concat(args))
+	    }
+	  })
+	  return res
+	}
+
+	function normalizeMap (map) {
+	  return Array.isArray(map)
+	    ? map.map(function (key) { return ({ key: key, val: key }); })
+	    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+	}
+
+	function isObject (obj) {
+	  return obj !== null && typeof obj === 'object'
+	}
+
+	function isPromise (val) {
+	  return val && typeof val.then === 'function'
+	}
+
+	function assert (condition, msg) {
+	  if (!condition) { throw new Error(("[vuex] " + msg)) }
+	}
+
+	var Vue // bind on install
+
+	var Store = function Store (options) {
+	  var this$1 = this;
+	  if ( options === void 0 ) options = {};
+
+	  assert(Vue, "must call Vue.use(Vuex) before creating a store instance.")
+	  assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.")
+
+	  var state = options.state; if ( state === void 0 ) state = {};
+	  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+	  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+	  // store internal state
+	  this._options = options
+	  this._committing = false
+	  this._actions = Object.create(null)
+	  this._mutations = Object.create(null)
+	  this._wrappedGetters = Object.create(null)
+	  this._runtimeModules = Object.create(null)
+	  this._subscribers = []
+	  this._watcherVM = new Vue()
+
+	    // bind commit and dispatch to self
+	  var store = this
+	  var ref = this;
+	  var dispatch = ref.dispatch;
+	  var commit = ref.commit;
+	  this.dispatch = function boundDispatch (type, payload) {
+	    return dispatch.call(store, type, payload)
+	    }
+	    this.commit = function boundCommit (type, payload, options) {
+	    return commit.call(store, type, payload, options)
+	  }
+
+	  // strict mode
+	  this.strict = strict
+
+	  // init root module.
+	  // this also recursively registers all sub-modules
+	  // and collects all module getters inside this._wrappedGetters
+	  installModule(this, state, [], options)
+
+	  // initialize the store vm, which is responsible for the reactivity
+	  // (also registers _wrappedGetters as computed properties)
+	  resetStoreVM(this, state)
+
+	  // apply plugins
+	  plugins.concat(devtoolPlugin).forEach(function (plugin) { return plugin(this$1); })
+	};
+
+	var prototypeAccessors = { state: {} };
+
+	prototypeAccessors.state.get = function () {
+	  return this._vm.state
+	};
+
+	prototypeAccessors.state.set = function (v) {
+	  assert(false, "Use store.replaceState() to explicit replace store state.")
+	};
+
+	Store.prototype.commit = function commit (type, payload, options) {
+	    var this$1 = this;
+
+	  // check object-style commit
+	  if (isObject(type) && type.type) {
+	    options = payload
+	    payload = type
+	    type = type.type
+	  }
+	  var mutation = { type: type, payload: payload }
+	  var entry = this._mutations[type]
+	  if (!entry) {
+	    console.error(("[vuex] unknown mutation type: " + type))
+	    return
+	  }
+	  this._withCommit(function () {
+	    entry.forEach(function commitIterator (handler) {
+	      handler(payload)
+	    })
+	  })
+	  if (!options || !options.silent) {
+	    this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); })
+	  }
+	};
+
+	Store.prototype.dispatch = function dispatch (type, payload) {
+	  // check object-style dispatch
+	  if (isObject(type) && type.type) {
+	    payload = type
+	    type = type.type
+	  }
+	  var entry = this._actions[type]
+	  if (!entry) {
+	    console.error(("[vuex] unknown action type: " + type))
+	    return
+	  }
+	  return entry.length > 1
+	    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+	    : entry[0](payload)
+	};
+
+	Store.prototype.subscribe = function subscribe (fn) {
+	  var subs = this._subscribers
+	  if (subs.indexOf(fn) < 0) {
+	    subs.push(fn)
+	  }
+	  return function () {
+	    var i = subs.indexOf(fn)
+	    if (i > -1) {
+	      subs.splice(i, 1)
+	    }
+	  }
+	};
+
+	Store.prototype.watch = function watch (getter, cb, options) {
+	    var this$1 = this;
+
+	  assert(typeof getter === 'function', "store.watch only accepts a function.")
+	  return this._watcherVM.$watch(function () { return getter(this$1.state); }, cb, options)
+	};
+
+	Store.prototype.replaceState = function replaceState (state) {
+	    var this$1 = this;
+
+	  this._withCommit(function () {
+	    this$1._vm.state = state
+	  })
+	};
+
+	Store.prototype.registerModule = function registerModule (path, module) {
+	  if (typeof path === 'string') { path = [path] }
+	  assert(Array.isArray(path), "module path must be a string or an Array.")
+	  this._runtimeModules[path.join('.')] = module
+	  installModule(this, this.state, path, module)
+	  // reset store to update getters...
+	  resetStoreVM(this, this.state)
+	};
+
+	Store.prototype.unregisterModule = function unregisterModule (path) {
+	    var this$1 = this;
+
+	  if (typeof path === 'string') { path = [path] }
+	  assert(Array.isArray(path), "module path must be a string or an Array.")
+	    delete this._runtimeModules[path.join('.')]
+	  this._withCommit(function () {
+	    var parentState = getNestedState(this$1.state, path.slice(0, -1))
+	    Vue.delete(parentState, path[path.length - 1])
+	  })
+	  resetStore(this)
+	};
+
+	Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+	  updateModule(this._options, newOptions)
+	  resetStore(this)
+	};
+
+	Store.prototype._withCommit = function _withCommit (fn) {
+	  var committing = this._committing
+	  this._committing = true
+	  fn()
+	  this._committing = committing
+	};
+
+	Object.defineProperties( Store.prototype, prototypeAccessors );
+
+	function updateModule (targetModule, newModule) {
+	  if (newModule.actions) {
+	    targetModule.actions = newModule.actions
+	  }
+	  if (newModule.mutations) {
+	    targetModule.mutations = newModule.mutations
+	  }
+	  if (newModule.getters) {
+	    targetModule.getters = newModule.getters
+	  }
+	  if (newModule.modules) {
+	    for (var key in newModule.modules) {
+	      if (!(targetModule.modules && targetModule.modules[key])) {
+	        console.warn(
+	          "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+	          'manual reload is needed'
+	        )
+	        return
+	      }
+	      updateModule(targetModule.modules[key], newModule.modules[key])
+	    }
+	  }
+	}
+
+	function resetStore (store) {
+	  store._actions = Object.create(null)
+	  store._mutations = Object.create(null)
+	  store._wrappedGetters = Object.create(null)
+	  var state = store.state
+	  // init root module
+	  installModule(store, state, [], store._options, true)
+	  // init all runtime modules
+	  Object.keys(store._runtimeModules).forEach(function (key) {
+	    installModule(store, state, key.split('.'), store._runtimeModules[key], true)
+	  })
+	  // reset vm
+	  resetStoreVM(store, state)
+	}
+
+	function resetStoreVM (store, state) {
+	  var oldVm = store._vm
+
+	  // bind store public getters
+	  store.getters = {}
+	  var wrappedGetters = store._wrappedGetters
+	  var computed = {}
+	  Object.keys(wrappedGetters).forEach(function (key) {
+	    var fn = wrappedGetters[key]
+	    // use computed to leverage its lazy-caching mechanism
+	    computed[key] = function () { return fn(store); }
+	    Object.defineProperty(store.getters, key, {
+	      get: function () { return store._vm[key]; }
+	    })
+	  })
+
+	  // use a Vue instance to store the state tree
+	  // suppress warnings just in case the user has added
+	  // some funky global mixins
+	  var silent = Vue.config.silent
+	  Vue.config.silent = true
+	  store._vm = new Vue({
+	    data: { state: state },
+	    computed: computed
+	  })
+	  Vue.config.silent = silent
+
+	  // enable strict mode for new vm
+	  if (store.strict) {
+	    enableStrictMode(store)
+	  }
+
+	  if (oldVm) {
+	    // dispatch changes in all subscribed watchers
+	    // to force getter re-evaluation.
+	    store._withCommit(function () {
+	      oldVm.state = null
+	    })
+	    Vue.nextTick(function () { return oldVm.$destroy(); })
+	  }
+	}
+
+	function installModule (store, rootState, path, module, hot) {
+	  var isRoot = !path.length
+	  var state = module.state;
+	  var actions = module.actions;
+	  var mutations = module.mutations;
+	  var getters = module.getters;
+	  var modules = module.modules;
+
+	  // set state
+	  if (!isRoot && !hot) {
+	    var parentState = getNestedState(rootState, path.slice(0, -1))
+	    var moduleName = path[path.length - 1]
+	    store._withCommit(function () {
+	      Vue.set(parentState, moduleName, state || {})
+	    })
+	  }
+
+	  if (mutations) {
+	    Object.keys(mutations).forEach(function (key) {
+	      registerMutation(store, key, mutations[key], path)
+	    })
+	  }
+
+	  if (actions) {
+	    Object.keys(actions).forEach(function (key) {
+	      registerAction(store, key, actions[key], path)
+	    })
+	  }
+
+	  if (getters) {
+	    wrapGetters(store, getters, path)
+	  }
+
+	  if (modules) {
+	    Object.keys(modules).forEach(function (key) {
+	      installModule(store, rootState, path.concat(key), modules[key], hot)
+	    })
+	  }
+	}
+
+	function registerMutation (store, type, handler, path) {
+	  if ( path === void 0 ) path = [];
+
+	  var entry = store._mutations[type] || (store._mutations[type] = [])
+	  entry.push(function wrappedMutationHandler (payload) {
+	    handler(getNestedState(store.state, path), payload)
+	  })
+	}
+
+	function registerAction (store, type, handler, path) {
+	  if ( path === void 0 ) path = [];
+
+	  var entry = store._actions[type] || (store._actions[type] = [])
+	  var dispatch = store.dispatch;
+	  var commit = store.commit;
+	  entry.push(function wrappedActionHandler (payload, cb) {
+	    var res = handler({
+	      dispatch: dispatch,
+	      commit: commit,
+	      getters: store.getters,
+	      state: getNestedState(store.state, path),
+	      rootState: store.state
+	    }, payload, cb)
+	    if (!isPromise(res)) {
+	      res = Promise.resolve(res)
+	    }
+	    if (store._devtoolHook) {
+	      return res.catch(function (err) {
+	        store._devtoolHook.emit('vuex:error', err)
+	        throw err
+	      })
+	    } else {
+	      return res
+	    }
+	  })
+	}
+
+	function wrapGetters (store, moduleGetters, modulePath) {
+	  Object.keys(moduleGetters).forEach(function (getterKey) {
+	    var rawGetter = moduleGetters[getterKey]
+	    if (store._wrappedGetters[getterKey]) {
+	      console.error(("[vuex] duplicate getter key: " + getterKey))
+	      return
+	    }
+	    store._wrappedGetters[getterKey] = function wrappedGetter (store) {
+	      return rawGetter(
+	        getNestedState(store.state, modulePath), // local state
+	        store.getters, // getters
+	        store.state // root state
+	      )
+	    }
+	  })
+	}
+
+	function enableStrictMode (store) {
+	  store._vm.$watch('state', function () {
+	    assert(store._committing, "Do not mutate vuex store state outside mutation handlers.")
+	  }, { deep: true, sync: true })
+	}
+
+	function getNestedState (state, path) {
+	  return path.length
+	    ? path.reduce(function (state, key) { return state[key]; }, state)
+	    : state
+	}
+
+	function install (_Vue) {
+	  if (Vue) {
+	    console.error(
+	      '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+	    )
+	    return
+	  }
+	  Vue = _Vue
+	  applyMixin(Vue)
+	}
+
+	// auto install in dist mode
+	if (typeof window !== 'undefined' && window.Vue) {
+	  install(window.Vue)
+	}
+
+	var index = {
+	  Store: Store,
+	  install: install,
+	  mapState: mapState,
+	  mapMutations: mapMutations,
+	  mapGetters: mapGetters,
+	  mapActions: mapActions
+	}
+
+	return index;
+
+	})));
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(12)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] app\\components\\commont.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(13)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
+	if (__vue_template__) {
+	__vue_options__.template = __vue_template__
+	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  var id = "_v-32d22c95/commont.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<h1 class=\"title\">This is my to-do list</h1>\n<input type=\"text\" v-model=\"newItem\" @keyup.enter=\"addItem\">\n<ul class=\"to-do-list\">\n\t<li v-for=\"item in items\" v-text=\"item.label\" @click=\"clickHandler(item)\" :class=\"{hasFinished: item.finished}\"></li>\n</ul>\n";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	// <template>
+	// 	<input type="text" v-model="message" @keyup.enter="addMessage" placeholder="说句话吧...">
+	// </template>
+	// <script>
+	//import store from 'vuexs/store';
+	exports.default = {
+		store: store,
+		/*data() {
+	 	return {
+	 		message: ''
+	 	}
+	 },*/
+		props: [],
+		computed: {
+			message: undefined.$store.state.newComment.content
+		},
+		methods: {
+			addMessage: function addMessage() {
+				console.log(this.message);
+				this.$store.commit('add_comment');
+				//console.log(this.$emit('submitCommont'));
+				/*this.$dispatch('submitCommont', this.message);
+	   this.message = '';*/
+			}
+		}
+	};
+	// </script>
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<input type=\"text\" v-model=\"message\" @keyup.enter=\"addMessage\" placeholder=\"说句话吧...\">\n";
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<h1 class=\"title\">chat room</h1>\n<ul class=\"to-do-list\">\n\t<li v-for=\"item in items\" @click=\"clickHandler(item)\">\n\t\t<span class=\"name\">{{item.name}}</span><strong>:</strong>\n\t\t<span class=\"text\">{{item.text}}</span>\n\t</li>\n</ul>\n<commont></commont>\n";
 
 /***/ }
 /******/ ]);

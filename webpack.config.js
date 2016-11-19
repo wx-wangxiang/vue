@@ -51,7 +51,8 @@ module.exports = {
 		extensions: ['', '.js', '.vue'],
 		// 别名，可以直接使用别名来代表设定的路径以及其他
 		alias: {
-			components: path.join(__dirname, './app/components')
+			components: path.join(__dirname, './app/components'),
+			vuexs: path.join(__dirname, './app/vuex')
 		}
 	}
 }

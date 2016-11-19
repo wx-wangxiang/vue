@@ -2,16 +2,19 @@
 	<h1 class="title">chat room</h1>
 	<ul class="to-do-list">
 		<li v-for="item in items" @click="clickHandler(item)">
-			<span class="name">{{item.name}}</span><strong>:</strong>
-			<span class="text">{{item.text}}</span>
+			<span class="name">{{item.author}}</span><strong>:</strong>
+			<span class="text">{{item.content}}</span>
 		</li>
 	</ul>
 	<commont></commont>
 </template>
 <script>
-	import Commont from 'components/commont'
+	import store from 'vuexs/store';
+	import Commont from 'components/commont';
+	import { mapState } from 'vuex';
 	export default{
-		data() {
+		store,
+		/*data() {
 			return {
 				items: [{
 					name: 'Tom',
@@ -25,7 +28,10 @@
 				}],
 				newItem: ''
 			}
-		},
+		},*/
+		computed: mapState({
+			items:  'msgList'
+		}),
 		components: {Commont},
 		events: {
 		    'submitCommont': function (msg) {
