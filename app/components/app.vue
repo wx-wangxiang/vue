@@ -1,5 +1,11 @@
 <template>
 	<h1 class="title">chat room</h1>
+	<select>
+		<option value="wang xiang">王先生</option>
+		<option value="ming">小明</option>
+		<option value="ding">丁丁</option>
+	</select>
+	<span>总共说了：</span>{{msgCount}}<span>句话</span>
 	<ul class="to-do-list">
 		<li v-for="item in items" @click="clickHandler(item)">
 			<span class="name">{{item.author}}</span><strong>:</strong>
@@ -12,6 +18,7 @@
 	import store from 'vuexs/store';
 	import Commont from 'components/commont';
 	import { mapState } from 'vuex';
+	import {mapGetters} from 'vuex';
 	export default{
 		store,
 		/*data() {
@@ -29,9 +36,13 @@
 				newItem: ''
 			}
 		},*/
-		computed: mapState({
-			items:  'msgList'
-		}),
+		computed: {
+			localComputed () {},
+			...mapState({
+				items:  'msgList'
+			}),
+			...mapGetters(['totalMsg'])
+		},
 		components: {Commont},
 		events: {
 		    'submitCommont': function (msg) {

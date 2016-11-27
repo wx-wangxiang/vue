@@ -10,7 +10,8 @@ const store = new Vuex.Store({
     newComment: {
     	author: 'wang xiang',
     	content: 'hello'
-    }
+    },
+    selectedName: ''
   },
   mutations: {
     add_comment (state) {
@@ -27,7 +28,13 @@ const store = new Vuex.Store({
   getters: {
   	newComment: state => {
   		return state.newComment;
-  	}
+  	},
+    totalMsg (state) {
+      return state.msgList.length;
+    },
+    msgCountBy (state, name) {
+      return state.msgList.filter(msg => msg.author === state.selectedName).length;
+    }
   }
 })
 
