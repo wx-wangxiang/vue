@@ -5,7 +5,7 @@
 		<option value="ming">小明</option>
 		<option value="ding">丁丁</option>
 	</select>
-	<span>总共说了：</span>{{msgCount}}<span>句话</span>
+	<span>总共说了：</span>{{totalMsg}}<span>句话</span>
 	<ul class="to-do-list">
 		<li v-for="item in items" @click="clickHandler(item)">
 			<span class="name">{{item.author}}</span><strong>:</strong>

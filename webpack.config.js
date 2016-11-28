@@ -24,7 +24,11 @@ module.exports = {
 			loader: 'url?limit=8192'
 		},{
 			test: /\.js$/,
-			loaders:['babel?{"presets":["es2015"]}'],
+			loader:'babel', //?{"presets":["es2015"],"plugins":["transform-runtime", "transform-object-rest-spread"]}
+			query: {
+				presets: ["es2015"],
+				plugins: ["transform-runtime", "transform-object-rest-spread"]
+			},
 			exclude: /node_modules/
 		},{
 			test: /\.vue$/,
@@ -43,7 +47,7 @@ module.exports = {
 	],
 	vue: {
 		loaders: {
-			js: 'babel?{"presets":["es2015"]}'
+			js: 'babel?{"presets":["es2015"],"plugins":["transform-runtime", "transform-object-rest-spread"]}'
 		}
 	},
 	resolve: {
