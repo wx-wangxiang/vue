@@ -1,91 +1,68 @@
 <template>
-	<h1 class="title">chat room</h1>
-	<select>
-		<option value="wang xiang">王先生</option>
-		<option value="ming">小明</option>
-		<option value="ding">丁丁</option>
-	</select>
-	<span>总共说了：</span>{{msgCount}}<span>句话</span>
-	<ul class="to-do-list">
-		<li v-for="item in items" @click="clickHandler(item)">
-			<span class="name">{{item.author}}</span><strong>:</strong>
-			<span class="text">{{item.content}}</span>
-		</li>
-	</ul>
-	<commont></commont>
+	<div>
+		<h1 class="title">chat room</h1>
+		<select v-model="selectPerson">
+			<option value="">请选择</option>
+			<option value="wang xiang">王先生</option>
+			<option value="ming">小明</option>
+			<option value="ding">丁丁</option>
+		</select>
+		<span>总共说了：</span>{{msgCount}}<span>句话</span>
+		<ul class="to-do-list">
+			<li v-for="item in items" @click="clickHandler(item)">
+				<span class="name">{{item.author}}</span><strong>:</strong>
+				<span class="text">{{item.content}}</span>
+			</li>
+		</ul>
+		<!-- <commont :person="selectPerson" v-on:submit="submitCommont"></commont> -->
+	</div>
 </template>
 <script>
-	import store from 'vuexs/store';
-	import Commont from 'components/commont';
-	import { mapState } from 'vuex';
-	import {mapGetters} from 'vuex';
+	//import Commont from 'components/commont'
 	export default{
-		store,
-		/*data() {
+		data() {
 			return {
 				items: [{
-					name: 'Tom',
-					text: 'hello'
+					author: 'ming',
+					content: 'hello'
 				},{
-					name: 'Tommy',
-					text: 'hello'
+					author: 'wang xiang',
+					content: 'hello'
 				},{
-					name: 'Jim',
-					text: 'hello'
+					author: 'ding',
+					content: 'hello'
 				}],
-				newItem: ''
+				msgCount: 0,
+				selectPerson: ''
 			}
-		},*/
-		computed: {
-			localComputed () {},
-			...mapState({
-				items:  'msgList'
-			}),
-			...mapGetters({
-				msgCount: 'totalMsg'
-			})
 		},
-		components: {Commont},
-		events: {
-		    'submitCommont': function (msg) {
-		      // 事件回调内的 `this` 自动绑定到注册它的实例上
-		     console.log('hello');
-			var obj = {
-				name: 'wang xiang',
-				text: msg
-			}
-			console.log('ok');
-			this.items.push(obj);
-		    }
-		},
+		//components: {Commont},
 		methods: {
+			submitCommont(msg) {
+				const name = ['wang xiang', 'ming', 'ding'][Math.floor(Math.random() * 3)],
+					obj = {
+						author: name,
+						content: msg
+					};
+				this.items.push(obj);
+			},
 			clickHandler: function (item) {
 				item.finished = !item.finished;
 				console.log('ok');
-			},
-			submitHandler: function(message){
-				console.log('hello');
-				var obj = {
-					name: 'wang xiang',
-					text: message
-				}
-				console.log('ok');
-				this.items.push(obj);
-			},
-			addItem: function(){
-				console.log(this.newItem);
-				var item = this.newItem;
-				var obj = {
-					name: 'wang xiang',
-					text: item
-				}
-				this.items.push(obj);
-				this.newItem = ''
+			}
+		},
+		watch: {
+			selectPerson(n, o) {
+				let tempArr = [];
+				tempArr = this.items.filter(function(item){
+					return item.author === n;
+				})
+				this.msgCount = tempArr.length;
 			}
 		}
 	}
 </script>
-<style type="text/css">
+<style type="text/css" scoped>
 	.title{
 		text-align: left;
 	}

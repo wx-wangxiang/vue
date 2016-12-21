@@ -1,0 +1,10 @@
+.link{
+	display: inline-block;
+	border: 1px solid #ddd;
+	box-shadow: 3px 3px 3px #888888;
+	width: 120px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	text-decoration: none;
+}

@@ -11,6 +11,7 @@ module.exports = {
 	},
 	output: {
 		path: BUILD_PATH,
+		publicPath: '/build/',
 		filename: '[name].js'
 	},
 	module: {
@@ -20,7 +21,11 @@ module.exports = {
 			loaders: ['style', 'css'],
 			include: APP_PATH
 		},{
-			test: /\.(png|jpg|gif|woff|woff2)/,
+			test: /\.less$/,
+			loaders: ['style', 'css', 'less'],
+			include: APP_PATH
+		},{
+			test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)/,
 			loader: 'url?limit=8192'
 		},{
 			test: /\.js$/,

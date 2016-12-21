@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>vue demo</title>
 </head>
 <body>
-	<app></app>
-	
+	<div id="Demo">
+		<p>
+			<router-link to='/chatroom' class="link chat-room">ChatRoom</router-link>
+			<router-link to='/test' class="link test">Test</router-link>
+		</p>
+		<router-view></router-view>
+	</div>
 </body>
 </html>
