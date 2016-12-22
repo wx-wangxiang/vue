@@ -14,11 +14,11 @@
 				<span class="text">{{item.content}}</span>
 			</li>
 		</ul>
-		<!-- <commont :person="selectPerson" v-on:submit="submitCommont"></commont> -->
+		<commont :person="selectPerson" v-on:submit="submitCommont"></commont>
 	</div>
 </template>
 <script>
-	//import Commont from 'components/commont'
+	import Commont from 'components/commont'
 	export default{
 		data() {
 			return {
@@ -36,7 +36,7 @@
 				selectPerson: ''
 			}
 		},
-		//components: {Commont},
+		components: {Commont},
 		methods: {
 			submitCommont(msg) {
 				const name = ['wang xiang', 'ming', 'ding'][Math.floor(Math.random() * 3)],
@@ -62,6 +62,9 @@
 		}
 	}
 </script>
+<style lang="less">
+    @import "../styles/index.less";
+</style>
 <style type="text/css" scoped>
 	.title{
 		text-align: left;

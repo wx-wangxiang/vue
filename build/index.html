@@ -2,10 +2,16 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>vue demo</title>
 </head>
 <body>
-	<app></app>
-	
-<script type="text/javascript" src="app.js"></script></body>
+	<div id="Demo">
+		<p>
+			<router-link to='/chatroom' class="link chat-room">ChatRoom</router-link>
+			<router-link to='/componenta' class="link componenta">InputComponent</router-link>
+			<router-link to='/test' class="link test">Test</router-link>
+		</p>
+		<router-view></router-view>
+	</div>
+<script type="text/javascript" src="/build/app.js"></script></body>
 </html>

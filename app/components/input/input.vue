@@ -36,10 +36,10 @@
     </div>
 </template>
 <script>
-    import { oneOf } from '../../utils/assist';
-    import calcTextareaHeight from '../../utils/calcTextareaHeight';
+    import { oneOf } from '../../utils/assist'
+    import calcTextareaHeight from '../../utils/calcTextareaHeight'
 
-    const prefixCls = 'ivu-input';
+    const prefixCls = 'ivu-input'
 
     export default {
         props: {
@@ -51,8 +51,7 @@
             },
             value: {
                 type: [String, Number],
-                default: '',
-                twoWay: true
+                default: ''
             },
             size: {
                 validator (value) {
@@ -93,10 +92,21 @@
                 prepend: true,
                 append: true,
                 slotReady: false,
-                textareaStyles: {}
+                textareaStyles: {},
+                //创建 value元素的副本
+                myValue: this.value
             }        
         },
         computed: {
+            value: {
+                get() {
+                    return this.myValue;
+                },
+                set(val) {
+                    this.$emit('inputChange', val);
+                    console.log(`child:${val}`);
+                }
+            },
             wrapClasses () {
                 return [
                     `${prefixCls}-wrapper`,
@@ -159,7 +169,7 @@
                 this.$emit('on-change', val);
             }
         },
-        ready () {
+        mounted () {
             if (this.type === 'text') {
                 this.prepend = this.$refs.prepend.innerHTML !== '';
                 this.append = this.$refs.append.innerHTML !== '';
