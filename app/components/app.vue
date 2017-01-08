@@ -19,6 +19,7 @@
 </template>
 <script>
 	import Commont from 'components/commont'
+	import '../styles/index.less'
 	export default{
 		data() {
 			return {
@@ -62,9 +63,6 @@
 		}
 	}
 </script>
-<style lang="less">
-    @import "../styles/index.less";
-</style>
 <style type="text/css" scoped>
 	.title{
 		text-align: left;

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ChatRoom from '../components/app.vue'
-import ComponentTestA from '../components/componenttest.vue'
+import ComponentTest from '../components/componenttest.vue'
 
 Vue.use(VueRouter)
 
@@ -18,7 +18,7 @@ const Test = { template: '<div>test</div>' }
 const routes = [
 	{path: '/chatroom', component: ChatRoom},
 	{path: '/test', component: Test},
-	{path: '/componenta', component: ComponentTestA}
+	{path: '/componenttest', component: ComponentTest}
 ]
 
 const router = new VueRouter({routes: routes})

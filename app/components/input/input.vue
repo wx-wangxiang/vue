@@ -103,7 +103,8 @@
                     return this.myValue;
                 },
                 set(val) {
-                    this.$emit('inputChange', val);
+                    this.myValue = val;
+                    this.$emit('input', val);
                     console.log(`child:${val}`);
                 }
             },
