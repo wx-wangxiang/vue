@@ -2,41 +2,41 @@
 	<div>
 		<h2>input 组件</h2>
 		<div class="input-component">
-			<ct-input :value="parentValue" v-on:input="inputHandler" style="width: 300px" placeholder="请输入..."></ct-input>
+			<ct-input v-model="parentValue" style="width: 300px" placeholder="请输入..."></ct-input>{{parentValue}}
 		</div>
-		<h2>checkbox 组件</h2>
+		<!-- <h2>checkbox 组件</h2>
 		<div>
 			<ct-checkbox ref="checkbox" :value="复选框" :checked="isToday" :disabled="isDisabled">今天</ct-checkbox>
 		</div>
 		<h2>list 组件</h2>
 		<ct-list 
 			:prefix-cls="prefixCls + '-list'"
-            :data="listData"
-            :render-format="renderFormat"
-            :checked-keys="CheckedKeys"
-            :valid-keys-count="ValidKeysCount"
-            :style="listStyle"
-            :title="titles[0]"
-            :filterable="filterable"
-            :filter-placeholder="filterPlaceholder"
-            :filter-method="filterMethod"
-            :not-found-text="notFoundText"
-            v-on:on-CheckedKeys="getCheckedKeys">
-            <slot></slot>
-            </ct-list>
+		            :data="listData"
+		            :render-format="renderFormat"
+		            :checked-keys="CheckedKeys"
+		            :valid-keys-count="ValidKeysCount"
+		            :style="listStyle"
+		            :title="titles[0]"
+		            :filterable="filterable"
+		            :filter-placeholder="filterPlaceholder"
+		            :filter-method="filterMethod"
+		            :not-found-text="notFoundText"
+		            v-on:on-CheckedKeys="getCheckedKeys">
+		            <slot></slot>
+		            </ct-list> -->
 	</div>
 </template>
 <script>
 	import ctInput from './input/input.vue'
-	import ctCheckbox from './checkbox/checkbox.vue'
-	import ctList from './transfer/list.vue'
+	//import ctCheckbox from './checkbox/checkbox.vue'
+	//import ctList from './transfer/list.vue'
 
 	const prefixCls = 'ivu-transfer'
 	export default {
 		data() {
 			return {
-				parentValue: '',
-				isToday: true,
+				parentValue: 'dsfdsf',
+				isToday: false,
 				isDisabled: false,
 				prefixCls: prefixCls,
 				listData: [
@@ -69,23 +69,24 @@
 				this.CheckedKeys = arr;
 			},
 			getValidKeys() {
+				console.log(this.CheckedKeys);
                 return this.listData.filter(data => !data.disabled && this.CheckedKeys.indexOf(data.key) > -1).map(data => data.key);
             }
 		},
-		computed: {
+		/*computed: {
 			ValidKeysCount() {
 				return this.getValidKeys().length;
 			}
-		},
-		components: {ctInput, ctCheckbox, ctList},
+		},*/
+		components: {ctInput},
 		mounted() {
 			this.$on('test', function(msg){
 				console.log(msg);
 			});
-			this.$refs.checkbox.$on('on-change', function(msg){
+			/*this.$refs.checkbox.$on('on-change', function(msg){
 				this.isToday = msg;
 				console.log(`this.isToday = ${this.isToday}`);
-			});
+			});*/
 			console.log('mounted');
 		}
 	}

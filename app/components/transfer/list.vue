@@ -90,7 +90,7 @@
                 return this.showItems.filter(function(value) {
                     return _this.filterMethod(value, _this.query);
                 });
-            },
+            }/*,
             checkedKeys: {
                 get() {
                     return this.myCheckedKeys;
@@ -98,7 +98,7 @@
                 set(keyArr) {
                     this.$emit('on-CheckedKeys', keyArr);
                 }
-            }
+            }*/
         },
         methods: {
             itemClasses (item) {
@@ -122,7 +122,6 @@
                 //如果不存在表示此次点击是选择行为
                 index > -1 ? this.myCheckedKeys.splice(index, 1) : this.myCheckedKeys.push(item.key);
                 console.log('hello');
-                this.checkedKeys = this.myCheckedKeys;
             },
             updateFilteredData () {
                 this.showItems = this.data;

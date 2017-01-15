@@ -4,17 +4,21 @@
             <div :class="[prefixCls + '-group-prepend']" v-if="prepend" v-show="slotReady" ref="prepend"><slot name="prepend"></slot></div>
             <i class="ivu-icon" :class="['ivu-icon-' + icon, prefixCls + '-icon']" v-if="icon" @click="handleIconClick"></i>
             <input
-                :type="type"
+                @change="$emit('change', currentValue)"
+                ref="input"
                 :class="inputClasses"
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :maxlength="maxlength"
                 :readonly="readonly"
                 :name="name"
-                v-model="value"
+                :number="type === 'number'"
+                :type="type"
                 @keyup.enter="handleEnter"
                 @focus="handleFocus"
-                @blur="handleBlur">
+                @blur="handleBlur"
+                :value="currentValue"
+                @input="handleInput">
             <div :class="[prefixCls + '-group-append']" v-if="append" v-show="slotReady" ref="append"><slot name="append"></slot></div>
         </template>
         <textarea
@@ -28,7 +32,7 @@
             :maxlength="maxlength"
             :readonly="readonly"
             :name="name"
-            v-model="value"
+            v-model="currentValue"
             @keyup.enter="handleEnter"
             @focus="handleFocus"
             @blur="handleBlur">
@@ -84,7 +88,9 @@
             },
             name: {
                 type: String
-            }
+            },
+            value: {},
+            attr: Object
         },
         data () {
             return {
@@ -94,20 +100,10 @@
                 slotReady: false,
                 textareaStyles: {},
                 //创建 value元素的副本
-                myValue: this.value
+                currentValue: this.value
             }        
         },
         computed: {
-            value: {
-                get() {
-                    return this.myValue;
-                },
-                set(val) {
-                    this.myValue = val;
-                    this.$emit('input', val);
-                    console.log(`child:${val}`);
-                }
-            },
             wrapClasses () {
                 return [
                     `${prefixCls}-wrapper`,
@@ -138,6 +134,10 @@
             }
         },
         methods: {
+            handleInput(evt) {
+                console.log('handleInput');
+                this.currentValue = evt.target.value;
+            },
             handleEnter () {
                 this.$emit('on-enter');
             },
@@ -163,11 +163,25 @@
             }
         },
         watch: {
-            value (val) {
-                this.$nextTick(() => {
-                    this.resizeTextarea();
-                });
-                this.$emit('on-change', val);
+            attr: {
+                immediate: true,
+                handler(attrs) {
+                    this.$nextTick(() => {
+                        const target = [this.$refs.input, this.$refs.textarea];
+                        target.forEach(el => {
+                            if (!el || !attrs) return;
+                            Object.keys(attrs).map(name => el.setAttribute(name, attrs[name]));
+                        });
+                    });
+                }
+            },
+            
+            value(val) {
+              this.currentValue = val;
+            },
+
+            currentValue(val) {
+              this.$emit('input', val);
             }
         },
         mounted () {

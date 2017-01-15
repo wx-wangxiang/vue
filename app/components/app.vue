@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script>
-	import Commont from 'components/commont'
+	import Commont from './commont'
 	import '../styles/index.less'
 	export default{
 		data() {
